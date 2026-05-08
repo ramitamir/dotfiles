@@ -1,0 +1,132 @@
+
+
+# ===========================================================
+# Ghostty Configuration for macOS
+# ===========================================================
+# -----------------------------------------------------------
+# Theme
+# -----------------------------------------------------------
+# Run `ghostty +list-themes` to browse all built-in themes.
+theme = light:Catppuccin Latte,dark:Github Dark High Contrast
+window-theme = auto
+
+# -----------------------------------------------------------
+# Font
+# -----------------------------------------------------------
+# Use any Nerd Font for icon support in starship, lsd, etc.
+# Popular choices: "JetBrainsMono Nerd Font",
+#   "FiraCode Nerd Font", "MesloLGM Nerd Font Mono"
+# Run `ghostty +list-fonts` to see what's installed.
+font-family = JetBrainsMono Nerd Font
+font-size = 16
+font-thicken = false
+adjust-cell-height = 5%
+
+# -----------------------------------------------------------
+# Window
+# -----------------------------------------------------------
+window-height = 35
+window-width = 150
+window-padding-x = 12
+window-padding-y = 8
+
+# "tabs" gives a clean Safari-style tab bar merged with titlebar
+# Other options: "transparent", "hidden", "native"
+macos-titlebar-style = tabs
+
+
+# -----------------------------------------------------------
+# Cursor
+# -----------------------------------------------------------
+cursor-style = bar
+cursor-style-blink = true
+cursor-opacity = 0.8
+
+# -----------------------------------------------------------
+# Mouse
+# -----------------------------------------------------------
+# Open links with Cmd+Click
+mouse-shift-capture = false
+mouse-hide-while-typing = true
+
+# Copy on select (like iTerm2 behavior) — set to false if you
+# prefer explicit Cmd+C
+copy-on-select = clipboard
+
+# -----------------------------------------------------------
+# Shell Integration
+# -----------------------------------------------------------
+# Ghostty auto-detects your shell; this enables prompt markers,
+# Cmd+click on file paths, etc.
+shell-integration = detect
+
+# -----------------------------------------------------------
+# Scrollback
+# -----------------------------------------------------------
+# 10 MB scrollback buffer (default is ~10MB, increase if needed)
+scrollback-limit = 25000000
+
+# -----------------------------------------------------------
+# Keybindings
+# -----------------------------------------------------------
+# Quick new split panes (like tmux but native)
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+
+# Navigate between splits
+keybind = cmd+alt+left=goto_split:left
+keybind = cmd+alt+right=goto_split:right
+keybind = cmd+alt+up=goto_split:top
+keybind = cmd+alt+down=goto_split:bottom
+
+# Quick font size adjustments
+keybind = cmd+equal=increase_font_size:1
+keybind = cmd+minus=decrease_font_size:1
+keybind = cmd+0=reset_font_size
+
+# Clear scrollback (handy during dev)
+keybind = cmd+k=clear_screen
+
+# Toggle fullscreen
+keybind = cmd+enter=toggle_fullscreen
+
+# Reload
+keybind = cmd+r=reload_config
+
+# Splits management
+keybind = cmd+shift+e=equalize_splits
+keybind = cmd+shift+f=toggle_split_zoom
+
+# Quick terminal (Quake-style dropdown)
+quick-terminal-position = top
+quick-terminal-screen = mouse
+quick-terminal-autohide = true
+quick-terminal-animation-duration = 0.15
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+
+# -----------------------------------------------------------
+# Misc
+# -----------------------------------------------------------
+# Confirm before closing a window with running processes
+confirm-close-surface = true
+
+
+# Automatically update (Ghostty checks on launch)
+auto-update = check
+
+
+# for micro to recognize cmd-left and right
+keybind = cmd+left=esc:OH
+keybind = cmd+right=esc:OF
+keybind = cmd+up=esc:[5~
+keybind = cmd+down=esc:[6~
+
+macos-option-as-alt = true
+
+
+window-save-state = never
+
+shell-integration-features = no-title
+
+# Fix TERM so apps like Claude Code statusline work correctly
+term = xterm-256color

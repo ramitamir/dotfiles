@@ -1,0 +1,5 @@
+{
+    "Ctrl-a": "StartOfTextToggle",
+    "Ctrl-e": "EndOfLine",
+    "Alt-e": "CommandMode"
+}

@@ -1,0 +1,26 @@
+call plug#begin()
+    Plug 'chrisbra/csv.vim'
+    " Mandatory dependency for vim-markdown table formatting
+    Plug 'godlygeek/tabular'
+    " The main markdown plugin
+    Plug 'preservim/vim-markdown'
+call plug#end()
+
+" --- CSV configuration ---
+augroup MyCSV
+    autocmd!
+    autocmd BufRead,BufEnter *.csv :%ArrangeColumn
+augroup END
+
+" --- Markdown settings ---
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_math = 1
+let g:vim_markdown_frontmatter = 1
+
+augroup MyMarkdown
+    autocmd!
+    autocmd BufRead,BufEnter *.md silent! g/|---/TableFormat
+augroup END
+
+filetype plugin indent on
+syntax on

@@ -17,3 +17,8 @@
 
 .config/micro/backups
 .config/micro/buffers
+
+**/.DS_Store
+
+.claude/skills/frontend-design
+.claude/skills/screenshot/node_modules

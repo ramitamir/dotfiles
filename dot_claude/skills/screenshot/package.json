@@ -1,0 +1,7 @@
+{
+  "name": "claude-screenshot-skill",
+  "type": "module",
+  "dependencies": {
+    "puppeteer-core": "^24.7.2"
+  }
+}

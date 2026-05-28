@@ -127,13 +127,20 @@
     "superpowers@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "clangd-lsp@claude-plugins-official": true,
-    "Tenaya@tenaya-plugins": true
+    "Tenaya@tenaya-plugins": true,
+    "salto-cli-skills@salto-claude-plugin": true
   },
   "extraKnownMarketplaces": {
     "tenaya-plugins": {
       "source": {
         "source": "github",
         "repo": "tenaya-io/company-os"
+      }
+    },
+    "salto-claude-plugin": {
+      "source": {
+        "source": "github",
+        "repo": "salto-io/salto-claude-plugin"
       }
     }
   },

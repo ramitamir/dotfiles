@@ -1,1 +1,2 @@
 . "$HOME/.cargo/env"
+export MIYAGI_USER_ID=c498e478-1091-70bb-137f-924a7aa4ffa4

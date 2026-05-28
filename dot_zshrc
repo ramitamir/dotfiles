@@ -28,3 +28,6 @@ export EDITOR=vim
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
 export PATH="$(npm config get prefix)/bin:$PATH"
+
+# Local, untracked overrides (secrets, machine-specific config)
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"

@@ -114,27 +114,121 @@
     ],
     "defaultMode": "auto"
   },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"${SUPACODE_SOCKET_PATH:-}\" ] && [ -n \"${SUPACODE_WORKTREE_ID:-}\" ] && [ -n \"${SUPACODE_TAB_ID:-}\" ] && [ -n \"${SUPACODE_SURFACE_ID:-}\" ] && { payload=$(cat); printf '%s' \"{\\\"event\\\":\\\"awaiting_input\\\",\\\"v\\\":1,\\\"agent\\\":\\\"claude\\\",\\\"surface_id\\\":\\\"$SUPACODE_SURFACE_ID\\\",\\\"pid\\\":$PPID}\" | /usr/bin/nc -U -w1 \"$SUPACODE_SOCKET_PATH\"; { printf '%s claude\\n' \"$SUPACODE_WORKTREE_ID $SUPACODE_TAB_ID $SUPACODE_SURFACE_ID\"; printf '%s' \"$payload\"; } | /usr/bin/nc -U -w1 \"$SUPACODE_SOCKET_PATH\"; } >/dev/null 2>&1 || true # supacode-managed-hook",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"${SUPACODE_SOCKET_PATH:-}\" ] && [ -n \"${SUPACODE_WORKTREE_ID:-}\" ] && [ -n \"${SUPACODE_TAB_ID:-}\" ] && [ -n \"${SUPACODE_SURFACE_ID:-}\" ] && printf '%s' \"{\\\"event\\\":\\\"idle\\\",\\\"v\\\":1,\\\"agent\\\":\\\"claude\\\",\\\"surface_id\\\":\\\"$SUPACODE_SURFACE_ID\\\",\\\"pid\\\":$PPID}\" | /usr/bin/nc -U -w1 \"$SUPACODE_SOCKET_PATH\" >/dev/null 2>&1 || true # supacode-managed-hook",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"${SUPACODE_SOCKET_PATH:-}\" ] && [ -n \"${SUPACODE_WORKTREE_ID:-}\" ] && [ -n \"${SUPACODE_TAB_ID:-}\" ] && [ -n \"${SUPACODE_SURFACE_ID:-}\" ] && printf '%s' \"{\\\"event\\\":\\\"busy\\\",\\\"v\\\":1,\\\"agent\\\":\\\"claude\\\",\\\"surface_id\\\":\\\"$SUPACODE_SURFACE_ID\\\",\\\"pid\\\":$PPID}\" | /usr/bin/nc -U -w1 \"$SUPACODE_SOCKET_PATH\" >/dev/null 2>&1 || true # supacode-managed-hook",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "AskUserQuestion|ExitPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"${SUPACODE_SOCKET_PATH:-}\" ] && [ -n \"${SUPACODE_WORKTREE_ID:-}\" ] && [ -n \"${SUPACODE_TAB_ID:-}\" ] && [ -n \"${SUPACODE_SURFACE_ID:-}\" ] && printf '%s' \"{\\\"event\\\":\\\"awaiting_input\\\",\\\"v\\\":1,\\\"agent\\\":\\\"claude\\\",\\\"surface_id\\\":\\\"$SUPACODE_SURFACE_ID\\\",\\\"pid\\\":$PPID}\" | /usr/bin/nc -U -w1 \"$SUPACODE_SOCKET_PATH\" >/dev/null 2>&1 || true # supacode-managed-hook",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"${SUPACODE_SOCKET_PATH:-}\" ] && [ -n \"${SUPACODE_WORKTREE_ID:-}\" ] && [ -n \"${SUPACODE_TAB_ID:-}\" ] && [ -n \"${SUPACODE_SURFACE_ID:-}\" ] && { printf '%s' \"{\\\"event\\\":\\\"session_end\\\",\\\"v\\\":1,\\\"agent\\\":\\\"claude\\\",\\\"surface_id\\\":\\\"$SUPACODE_SURFACE_ID\\\",\\\"pid\\\":$PPID}\" | /usr/bin/nc -U -w1 \"$SUPACODE_SOCKET_PATH\"; printf '%s' \"{\\\"event\\\":\\\"idle\\\",\\\"v\\\":1,\\\"agent\\\":\\\"claude\\\",\\\"surface_id\\\":\\\"$SUPACODE_SURFACE_ID\\\",\\\"pid\\\":$PPID}\" | /usr/bin/nc -U -w1 \"$SUPACODE_SOCKET_PATH\"; } >/dev/null 2>&1 || true # supacode-managed-hook",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"${SUPACODE_SOCKET_PATH:-}\" ] && [ -n \"${SUPACODE_WORKTREE_ID:-}\" ] && [ -n \"${SUPACODE_TAB_ID:-}\" ] && [ -n \"${SUPACODE_SURFACE_ID:-}\" ] && printf '%s' \"{\\\"event\\\":\\\"session_start\\\",\\\"v\\\":1,\\\"agent\\\":\\\"claude\\\",\\\"surface_id\\\":\\\"$SUPACODE_SURFACE_ID\\\",\\\"pid\\\":$PPID}\" | /usr/bin/nc -U -w1 \"$SUPACODE_SOCKET_PATH\" >/dev/null 2>&1 || true # supacode-managed-hook",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"${SUPACODE_SOCKET_PATH:-}\" ] && [ -n \"${SUPACODE_WORKTREE_ID:-}\" ] && [ -n \"${SUPACODE_TAB_ID:-}\" ] && [ -n \"${SUPACODE_SURFACE_ID:-}\" ] && { payload=$(cat); printf '%s' \"{\\\"event\\\":\\\"idle\\\",\\\"v\\\":1,\\\"agent\\\":\\\"claude\\\",\\\"surface_id\\\":\\\"$SUPACODE_SURFACE_ID\\\",\\\"pid\\\":$PPID}\" | /usr/bin/nc -U -w1 \"$SUPACODE_SOCKET_PATH\"; { printf '%s claude\\n' \"$SUPACODE_WORKTREE_ID $SUPACODE_TAB_ID $SUPACODE_SURFACE_ID\"; printf '%s' \"$payload\"; } | /usr/bin/nc -U -w1 \"$SUPACODE_SOCKET_PATH\"; } >/dev/null 2>&1 || true # supacode-managed-hook",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"${SUPACODE_SOCKET_PATH:-}\" ] && [ -n \"${SUPACODE_WORKTREE_ID:-}\" ] && [ -n \"${SUPACODE_TAB_ID:-}\" ] && [ -n \"${SUPACODE_SURFACE_ID:-}\" ] && printf '%s' \"{\\\"event\\\":\\\"busy\\\",\\\"v\\\":1,\\\"agent\\\":\\\"claude\\\",\\\"surface_id\\\":\\\"$SUPACODE_SURFACE_ID\\\",\\\"pid\\\":$PPID}\" | /usr/bin/nc -U -w1 \"$SUPACODE_SOCKET_PATH\" >/dev/null 2>&1 || true # supacode-managed-hook",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
-    "command": "npx -y ccstatusline@latest",
+    "command": "/Users/ramitamir/.claude/statusline-with-cache.sh",
     "padding": 0
   },
   "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true,
-    "github@claude-plugins-official": true,
+    "Tenaya@tenaya-plugins": true,
+    "clangd-lsp@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "plannotator@plannotator": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
-    "clangd-lsp@claude-plugins-official": true,
-    "Tenaya@tenaya-plugins": true,
-    "salto-cli-skills@salto-claude-plugin": true
+    "salto-cli-skills@salto-claude-plugin": true,
+    "superpowers@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
-    "tenaya-plugins": {
+    "plannotator": {
       "source": {
         "source": "github",
-        "repo": "tenaya-io/company-os"
+        "repo": "backnotprop/plannotator"
       }
     },
     "salto-claude-plugin": {
@@ -142,17 +236,25 @@
         "source": "github",
         "repo": "salto-io/salto-claude-plugin"
       }
+    },
+    "tenaya-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "tenaya-io/company-os"
+      }
     }
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
   "theme": "dark-daltonized",
   "preferredNotifChannel": "ghostty",
+  "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
   "allowedTools": [
     "WebSearch",
     "WebFetch",
     "Bash(python3 ~/.claude/skills/company-research/fetch.py *)",
     "Bash(node ~/.claude/skills/screenshot/capture.mjs *)"
-  ]
+  ],
+  "skipDangerousModePermissionPrompt": true
 }

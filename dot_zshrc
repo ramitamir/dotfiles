@@ -31,3 +31,5 @@ export PATH="$(npm config get prefix)/bin:$PATH"
 
 # Local, untracked overrides (secrets, machine-specific config)
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
+
+. "$HOME/.local/bin/env"

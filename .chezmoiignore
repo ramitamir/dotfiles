@@ -1,4 +1,5 @@
 .config/chezmoi
+.config/gws-tenaya-expense-skill
 
 .config/gh/hosts.yml
 .config/raycast/config.json

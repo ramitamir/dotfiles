@@ -24,6 +24,7 @@ export default {
     { match: /.*salto\.io.*/,          browser: { name: "Google Chrome", profile: WORK } },
     { match: /.*tulip.*\.com.*/,       browser: { name: "Google Chrome", profile: WORK } },
     { match: /.*comerica\.com.*/,      browser: { name: "Google Chrome", profile: WORK } },
+    { match: /.*linear\.app.*/,        browser: { name: "Google Chrome", profile: TENAYA }},
 
     { match: /^(https?:\/\/)?(?:www\.)?(twitter\.com|x\.com)\/.+/, browser: { name: "Google Chrome", profile: PERSONAL } },
     { match: /^(https?:\/\/)?(?:www\.)?facebook\.com\/.+/, browser: { name: "Google Chrome", profile: PERSONAL } },

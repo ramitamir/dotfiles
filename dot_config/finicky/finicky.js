@@ -13,7 +13,13 @@ export default {
     { match: /^https?:\/\/(?:[\w-]+\.)?zoom\.us\/.*\/j\/\d+/, browser: { name: "zoom.us", bundleId: "us.zoom.xos" } },
     { match: /^https?:\/\/(?:www\.)?teams\.microsoft\.com\/l\/meetup-join/, browser: { name: "Microsoft Teams" } },
     { match: /^https?:\/\/(?:www\.)?notion\.so\/.+/, browser: "Notion" },
-    
+
+    // LinkedIn always opens in the personal profile, regardless of which app the link came from
+    { match: /^https?:\/\/(?:[\w-]+\.)?(?:linkedin\.com|lnkd\.in)(?:\/|$)/, browser: { name: "Google Chrome", profile: PERSONAL } },
+
+    // X / Twitter always opens in the personal profile, regardless of which app the link came from
+    { match: /^https?:\/\/(?:[\w-]+\.)?(?:x\.com|twitter\.com|t\.co)(?:\/|$)/, browser: { name: "Google Chrome", profile: PERSONAL } },
+
     { match: (_url, { opener }) => opener?.bundleId === "com.tinyspeck.slackmacgap", browser: { name: "Google Chrome", profile: TENAYA } },
     { match: (_url, { opener }) => opener?.bundleId === "notion.id", browser: { name: "Google Chrome", profile: TENAYA } },
 
@@ -26,7 +32,6 @@ export default {
     { match: /.*comerica\.com.*/,      browser: { name: "Google Chrome", profile: WORK } },
     { match: /.*linear\.app.*/,        browser: { name: "Google Chrome", profile: TENAYA }},
 
-    { match: /^(https?:\/\/)?(?:www\.)?(twitter\.com|x\.com)\/.+/, browser: { name: "Google Chrome", profile: PERSONAL } },
     { match: /^(https?:\/\/)?(?:www\.)?facebook\.com\/.+/, browser: { name: "Google Chrome", profile: PERSONAL } },
     { match: /^(https?:\/\/)?(?:www\.)?instagram\.com\/.+/, browser: { name: "Google Chrome", profile: PERSONAL } },
     { match: /^(https?:\/\/)?(?:www\.)?tiktok\.com\/.+/, browser: { name: "Google Chrome", profile: PERSONAL } },

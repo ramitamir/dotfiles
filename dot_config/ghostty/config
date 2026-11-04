@@ -32,7 +32,7 @@ window-padding-y = 8
 
 # "tabs" gives a clean Safari-style tab bar merged with titlebar
 # Other options: "transparent", "hidden", "native"
-macos-titlebar-style = tabs
+macos-titlebar-style = "tabs"
 
 
 # -----------------------------------------------------------
@@ -112,6 +112,7 @@ confirm-close-surface = true
 
 
 # Automatically update (Ghostty checks on launch)
+auto-update-channel = tip
 auto-update = check
 
 
@@ -126,7 +127,9 @@ macos-option-as-alt = true
 
 window-save-state = never
 
-shell-integration-features = no-title
+shell-integration-features = no-title,no-cursor
 
 # Fix TERM so apps like Claude Code statusline work correctly
 term = xterm-256color
+
+link-url = true
